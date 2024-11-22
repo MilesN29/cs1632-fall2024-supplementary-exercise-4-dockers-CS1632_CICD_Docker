@@ -42,7 +42,7 @@ jobs:
 
 
       - name: Make Script Executable
-        run: chmod +x ./wait-for-webserver.sh
+        run: ./wait-for-webserver.sh
 
       - name: Wait for Web Server
         run: ./wait-for-webserver.sh
