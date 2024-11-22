@@ -39,6 +39,9 @@ public class D3Test {
 
   @Before
   public void setUp() {
+    ChromeOptions options = new ChromeOptions();
+    options.addArguments("--headless");
+    driver = new ChromeDriver(options);
     driver = new ChromeDriver();
     js = (JavascriptExecutor) driver;
     vars = new HashMap<String, Object>();
@@ -52,48 +55,54 @@ public class D3Test {
   // @SuppressWarnings("deprecation")
   // @Test
   // public void dEFECT1FUNGREETACAT() {
-  //   driver.get("http://localhost:8080");
-  //   driver.findElement(By.linkText("Rent-A-Cat")).click();
-  //   driver.findElement(By.id("rentID")).click();
-  //   driver.findElement(By.id("rentID")).sendKeys("1");
-  //   driver.findElement(By.xpath("//button[@onclick=\'rentSubmit()\']")).click();
-  //   driver.findElement(By.linkText("Greet-A-Cat")).click();
-  //   assertThat(driver.findElement(By.cssSelector("#greeting > h4")).getText(), is("Meow!Moew!"));
+  // driver.get("http://localhost:8080");
+  // driver.findElement(By.linkText("Rent-A-Cat")).click();
+  // driver.findElement(By.id("rentID")).click();
+  // driver.findElement(By.id("rentID")).sendKeys("1");
+  // driver.findElement(By.xpath("//button[@onclick=\'rentSubmit()\']")).click();
+  // driver.findElement(By.linkText("Greet-A-Cat")).click();
+  // assertThat(driver.findElement(By.cssSelector("#greeting > h4")).getText(),
+  // is("Meow!Moew!"));
   // }
 
   // @SuppressWarnings("deprecation")
   // @Test
   // public void dEFECT2FUNFEED() {
-  //   driver.get("http://localhost:8080");
-  //   js.executeScript("document.cookie = \"1=false\";document.cookie = \"2=false\";document.cookie = \"3=false\";");
-  //   driver.findElement(By.linkText("Feed-A-Cat")).click();
-  //   driver.findElement(By.id("catnips")).click();
-  //   driver.findElement(By.id("catnips")).sendKeys("0");
-  //   driver.findElement(By.xpath("//button[contains(.,\'Feed\')]")).click();
-  //   assertThat(driver.findElement(By.id("feedResult")).getText(), is("Cat fight!"));
+  // driver.get("http://localhost:8080");
+  // js.executeScript("document.cookie = \"1=false\";document.cookie =
+  // \"2=false\";document.cookie = \"3=false\";");
+  // driver.findElement(By.linkText("Feed-A-Cat")).click();
+  // driver.findElement(By.id("catnips")).click();
+  // driver.findElement(By.id("catnips")).sendKeys("0");
+  // driver.findElement(By.xpath("//button[contains(.,\'Feed\')]")).click();
+  // assertThat(driver.findElement(By.id("feedResult")).getText(), is("Cat
+  // fight!"));
   // }
 
   // @SuppressWarnings("deprecation")
   // @Test
   // public void dEFECT3FUNFEED() {
-  //   driver.get("http://localhost:8080");
-  //   js.executeScript("document.cookie = \"1=false\";document.cookie = \"2=false\";document.cookie = \"3=false\";");
-  //   driver.findElement(By.linkText("Feed-A-Cat")).click();
-  //   driver.findElement(By.id("catnips")).sendKeys("-6");
-  //   driver.findElement(By.xpath("//button[contains(.,\'Feed\')]")).click();
-  //   assertThat(driver.findElement(By.id("feedResult")).getText(), is("Cat fight!"));
+  // driver.get("http://localhost:8080");
+  // js.executeScript("document.cookie = \"1=false\";document.cookie =
+  // \"2=false\";document.cookie = \"3=false\";");
+  // driver.findElement(By.linkText("Feed-A-Cat")).click();
+  // driver.findElement(By.id("catnips")).sendKeys("-6");
+  // driver.findElement(By.xpath("//button[contains(.,\'Feed\')]")).click();
+  // assertThat(driver.findElement(By.id("feedResult")).getText(), is("Cat
+  // fight!"));
   // }
 
   // @SuppressWarnings("deprecation")
   // @Test
   // public void dEFECT4FUNGREETACATWITHNAME() {
-  //   driver.get("http://localhost:8080");
-  //   driver.findElement(By.linkText("Rent-A-Cat")).click();
-  //   driver.findElement(By.id("rentID")).click();
-  //   driver.findElement(By.id("rentID")).sendKeys("3");
-  //   driver.findElement(By.xpath("//button[@onclick=\'rentSubmit()\']")).click();
-  //   driver.get("https://cs1632.appspot.com/greet-a-cat/Mistoffelees");
-  //   assertThat(driver.findElement(By.cssSelector("#greeting > h4")).getText(), is("Mistoffelees is not here."));
+  // driver.get("http://localhost:8080");
+  // driver.findElement(By.linkText("Rent-A-Cat")).click();
+  // driver.findElement(By.id("rentID")).click();
+  // driver.findElement(By.id("rentID")).sendKeys("3");
+  // driver.findElement(By.xpath("//button[@onclick=\'rentSubmit()\']")).click();
+  // driver.get("https://cs1632.appspot.com/greet-a-cat/Mistoffelees");
+  // assertThat(driver.findElement(By.cssSelector("#greeting > h4")).getText(),
+  // is("Mistoffelees is not here."));
   // }
 
   @Test
@@ -131,24 +140,19 @@ public class D3Test {
 
   @Test
   public void tEST4LISTING() {
-      driver.get("https://cs1632.appspot.com/"); 
+    driver.get("https://cs1632.appspot.com/");
 
-      driver.findElement(By.linkText("Catalog")).click();
-  
-      WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-      wait.until(ExpectedConditions.presenceOfElementLocated(By.id("listing")));
+    driver.findElement(By.linkText("Catalog")).click();
 
-      List<WebElement> cats = driver.findElements(By.cssSelector("[id^='cat-id']"));
-      assertEquals("Expected 3 cats in the listing", 3, cats.size());
+    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+    wait.until(ExpectedConditions.presenceOfElementLocated(By.id("listing")));
 
-      String thirdCatText = cats.get(2).getText();
-      assertEquals("ID 3. Mistoffelees", thirdCatText);
+    List<WebElement> cats = driver.findElements(By.cssSelector("[id^='cat-id']"));
+    assertEquals("Expected 3 cats in the listing", 3, cats.size());
+
+    String thirdCatText = cats.get(2).getText();
+    assertEquals("ID 3. Mistoffelees", thirdCatText);
   }
-
-  
-
-  
-  
 
   @Test
   public void tEST5RENTACAT() {
@@ -166,15 +170,15 @@ public class D3Test {
 
   @SuppressWarnings("deprecation")
   @Test
-public void tEST6RENT() {
+  public void tEST6RENT() {
     driver.get("https://cs1632.appspot.com");
-    
+
     driver.manage().deleteAllCookies();
-    
+
     driver.findElement(By.linkText("Rent-A-Cat")).click();
     driver.findElement(By.id("rentID")).sendKeys("1");
     driver.findElement(By.xpath("//button[@onclick='rentSubmit()']")).click();
-    
+
     WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     wait.until(ExpectedConditions.textToBe(By.id("rentResult"), "Success!"));
 
@@ -185,7 +189,6 @@ public void tEST6RENT() {
     System.out.println("Rent result: " + resultText);
     System.out.println("Page source after renting: " + driver.getPageSource());
 
-  
     driver.findElement(By.linkText("Catalog")).click();
 
     wait.until(ExpectedConditions.presenceOfElementLocated(By.id("cat-id1")));
@@ -196,14 +199,13 @@ public void tEST6RENT() {
     // System.out.println("Cat 1 Status: " + cat1Status);
     // System.out.println("Cat 2 Status: " + cat2Status);
     // System.out.println("Cat 3 Status: " + cat3Status);
-    
+
     assertThat(cat1Status, is("Rented out"));
     assertThat(cat2Status, is("ID 2. Old Deuteronomy"));
     assertThat(cat3Status, is("ID 3. Mistoffelees"));
 
     js.executeScript("document.cookie = \"1=false\"; document.cookie = \"2=false\"; document.cookie = \"3=false\";");
-}
-
+  }
 
   @SuppressWarnings("deprecation")
   @Test
