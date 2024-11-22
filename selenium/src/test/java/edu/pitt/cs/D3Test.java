@@ -101,7 +101,7 @@ public class D3Test {
   // driver.findElement(By.id("rentID")).click();
   // driver.findElement(By.id("rentID")).sendKeys("3");
   // driver.findElement(By.xpath("//button[@onclick=\'rentSubmit()\']")).click();
-  // driver.get("https://cs1632.appspot.com/greet-a-cat/Mistoffelees");
+  // driver.get("http://localhost:8080greet-a-cat/Mistoffelees");
   // assertThat(driver.findElement(By.cssSelector("#greeting > h4")).getText(),
   // is("Mistoffelees is not here."));
   // }
@@ -114,13 +114,13 @@ public class D3Test {
       String attribute = element.getAttribute("href");
       vars.put("reset", attribute);
     }
-    assertEquals(vars.get("reset").toString(), "https://cs1632.appspot.com/reset");
+    assertEquals(vars.get("reset").toString(), "http://localhost:8080/reset");
   }
 
   @SuppressWarnings("deprecation")
   @Test
   public void tEST2RESET() {
-    driver.get("https://cs1632.appspot.com/");
+    driver.get("http://localhost:8080");
     js.executeScript("document.cookie = \"1=true\";document.cookie = \"2=true\";document.cookie = \"3=true\";");
     driver.findElement(By.linkText("Reset")).click();
     assertThat(driver.findElement(By.id("cat-id1")).getText(), is("ID 1. Jennyanydots"));
@@ -136,12 +136,12 @@ public class D3Test {
       String attribute = element.getAttribute("src");
       vars.put("image", attribute);
     }
-    assertEquals(vars.get("image").toString(), "https://cs1632.appspot.com/images/cat2.jpg");
+    assertEquals(vars.get("image").toString(), "http://localhost:8080/images/cat2.jpg");
   }
 
   @Test
   public void tEST4LISTING() {
-    driver.get("https://cs1632.appspot.com/");
+    driver.get("http://localhost:8080");
 
     driver.findElement(By.linkText("Catalog")).click();
 
@@ -172,7 +172,7 @@ public class D3Test {
   @SuppressWarnings("deprecation")
   @Test
   public void tEST6RENT() {
-    driver.get("https://cs1632.appspot.com");
+    driver.get("http://localhost:8080");
 
     driver.manage().deleteAllCookies();
 
@@ -268,7 +268,7 @@ public class D3Test {
   @SuppressWarnings("deprecation")
   @Test
   public void tEST11GREETACATWITHNAME() {
-    driver.get("http://localhost:8080greet-a-cat/Jennyanydots");
+    driver.get("http://localhost:8080/greet-a-cat/Jennyanydots");
     {
       WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
       wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id=\'greeting\']/h4")));
