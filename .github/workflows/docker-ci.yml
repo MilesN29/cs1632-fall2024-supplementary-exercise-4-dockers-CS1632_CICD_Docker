@@ -42,7 +42,7 @@ jobs:
 
 
       - name: Make Script Executable
-        run: ./wait-for-webserver.sh
+        run: ./.github/workflows/wait-for-webserver.sh
 
       - name: Wait for Web Server
         run: ./wait-for-webserver.sh
